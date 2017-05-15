@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<jenkins.model.ArtifactManagerConfiguration>
+  <artifactManagerFactories/>
+</jenkins.model.ArtifactManagerConfiguration>root@ip-172-31-43-229:/var/lib/jenkins# cat
+org.jfrog.hudson.ArtifactoryBuilder.xml
+org.jfrog.hudson.ArtifactoryBuilder.xml
+
+
+^C
+root@ip-172-31-43-229:/var/lib/jenkins# cat org.jfrog.hudson.ArtifactoryBuilder.xml
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl plugin="artifactory@2.10.4">
+  <useCredentialsPlugin>false</useCredentialsPlugin>
+  <artifactoryServers>
+    <org.jfrog.hudson.ArtifactoryServer>
+      <url>http://52.27.116.116:8081/artifactory</url>
+      <id>artifactory</id>
+      <timeout>300</timeout>
+      <bypassProxy>false</bypassProxy>
+      <connectionRetry>3</connectionRetry>
+      <deployerCredentialsConfig>
+        <credentials>
+          <username>admin</username>
+          <password>bmlraGls</password>
+        </credentials>
+        <credentialsId></credentialsId>
+        <overridingCredentials>false</overridingCredentials>
+        <ignoreCredentialPluginDisabled>false</ignoreCredentialPluginDisabled>
+      </deployerCredentialsConfig>
+    </org.jfrog.hudson.ArtifactoryServer>
+  </artifactoryServers>
+  <pushToBintrayEnabled>true</pushToBintrayEnabled>
+  <buildInfoProxyEnabled>false</buildInfoProxyEnabled>
+  <buildInfoProxyPort>0</buildInfoProxyPort>
+  <buildInfoProxyCertPublic>/var/lib/jenkins/secrets/jfrog/certs/jfrog.proxy.crt</buildInfoProxyCertPublic>
+  <buildInfoProxyCertPrivate>/var/lib/jenkins/secrets/jfrog/certs/jfrog.proxy.key</buildInfoProxyCertPrivate>
+</org.jfrog.hudson.ArtifactoryBuilder_-DescriptorImpl>

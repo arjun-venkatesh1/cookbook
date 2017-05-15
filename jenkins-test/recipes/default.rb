@@ -10,6 +10,26 @@
 apt_package 'maven' do
   action :install
 end
+
+template "#{node['jenkins']['master']['home']}/config.xml" do
+  source "config.xml.erb"
+end
+
+template "#{node['jenkins']['master']['home']}/hudson.tasks.Maven.xml" do
+ source 'hudson.tasks.Maven.xml.erb'
+end
+
+template "#{node['jenkins']['master']['home']}/jenkins.model.ArtifactManagerConfiguration.xml" do
+ source 'jenkins.model.ArtifactManagerConfiguration.xml.erb'
+end
+
+template "#{node['jenkins']['master']['home']}/org.jfrog.hudson.ArtifactoryBuilder.xml" do
+ source 'org.jfrog.hudson.ArtifactoryBuilder.xml.erb'
+variables(
+ art_ip: "52.27.116.116"
+ )
+end
+
 execute "restart jenkins" do
   command "service jenkins restart"
 

@@ -70,17 +70,17 @@
     <org.jfrog.hudson.ArtifactoryRedeployPublisher plugin="artifactory@2.10.4">
       <evenIfUnstable>false</evenIfUnstable>
       <details>
-        <artifactoryName>ar1</artifactoryName>
+        <artifactoryName>artifactory</artifactoryName>
         <artifactoryUrl>http://<%= @jfrog_ip %>:8081/artifactory</artifactoryUrl>
         <deployReleaseRepository>
-          <keyFromText></keyFromText>
-          <keyFromSelect>libs-release</keyFromSelect>
-          <dynamicMode>false</dynamicMode>
+          <keyFromText>libs-release</keyFromText>
+          <keyFromSelect>example-repo-local</keyFromSelect>
+          <dynamicMode>true</dynamicMode>
         </deployReleaseRepository>
         <deploySnapshotRepository>
-          <keyFromText></keyFromText>
-          <keyFromSelect>libs-snapshots</keyFromSelect>
-          <dynamicMode>false</dynamicMode>
+          <keyFromText>libs-release</keyFromText>
+          <keyFromSelect>example-repo-local</keyFromSelect>
+          <dynamicMode>true</dynamicMode>
         </deploySnapshotRepository>
         <stagingPlugin>
           <pluginName>None</pluginName>
