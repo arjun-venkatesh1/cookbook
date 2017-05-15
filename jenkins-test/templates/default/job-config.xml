@@ -1,0 +1,167 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<maven2-moduleset plugin="maven-plugin@2.15.1">
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  
+  
+  
+  <%- if @git %>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.3.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/deekshar/game-of-life.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <%- end %>
+
+
+<%- if @none %>
+<scm class="hudson.scm.NullSCM"/>
+ <%- end %>
+  
+  
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+  <concurrentBuild>false</concurrentBuild>
+  
+  <%- if @maven %>
+  <rootModule>
+    <groupId>com.wakaleo.gameoflife</groupId>
+    <artifactId>gameoflife</artifactId>
+  </rootModule>
+  <goals>clean install</goals>
+  <aggregatorStyleBuild>true</aggregatorStyleBuild>
+  <incrementalBuild>false</incrementalBuild>
+  <ignoreUpstremChanges>false</ignoreUpstremChanges>
+  <ignoreUnsuccessfulUpstreams>false</ignoreUnsuccessfulUpstreams>
+  <archivingDisabled>false</archivingDisabled>
+  <siteArchivingDisabled>false</siteArchivingDisabled>
+  <fingerprintingDisabled>false</fingerprintingDisabled>
+  <resolveDependencies>false</resolveDependencies>
+  <processPlugins>false</processPlugins>
+  <mavenValidationLevel>-1</mavenValidationLevel>
+  <runHeadless>false</runHeadless>
+  <disableTriggerDownstreamProjects>false</disableTriggerDownstreamProjects>
+  <blockTriggerWhenBuilding>true</blockTriggerWhenBuilding>
+  <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+  <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+  <reporters/>
+  <%- end %>
+  
+  
+  
+  <publishers>
+<%- if @jfrog %>
+    <org.jfrog.hudson.ArtifactoryRedeployPublisher plugin="artifactory@2.10.4">
+      <evenIfUnstable>false</evenIfUnstable>
+      <details>
+        <artifactoryName>ar1</artifactoryName>
+        <artifactoryUrl>http://<%= @jfrog_ip %>:8081/artifactory</artifactoryUrl>
+        <deployReleaseRepository>
+          <keyFromText></keyFromText>
+          <keyFromSelect>libs-release</keyFromSelect>
+          <dynamicMode>false</dynamicMode>
+        </deployReleaseRepository>
+        <deploySnapshotRepository>
+          <keyFromText></keyFromText>
+          <keyFromSelect>libs-snapshots</keyFromSelect>
+          <dynamicMode>false</dynamicMode>
+        </deploySnapshotRepository>
+        <stagingPlugin>
+          <pluginName>None</pluginName>
+        </stagingPlugin>
+        <userPluginKey>None</userPluginKey>
+      </details>
+      <deployArtifacts>true</deployArtifacts>
+      <artifactDeploymentPatterns>
+        <includePatterns></includePatterns>
+        <excludePatterns></excludePatterns>
+      </artifactDeploymentPatterns>
+      <deployerCredentialsConfig>
+        <credentials>
+          <username></username>
+          <password></password>
+        </credentials>
+        <credentialsId></credentialsId>
+        <overridingCredentials>false</overridingCredentials>
+        <ignoreCredentialPluginDisabled>false</ignoreCredentialPluginDisabled>
+      </deployerCredentialsConfig>
+      <includeEnvVars>false</includeEnvVars>
+      <envVarsPatterns>
+        <includePatterns></includePatterns>
+        <excludePatterns>*password*,*secret*,*key*</excludePatterns>
+      </envVarsPatterns>
+      <runChecks>false</runChecks>
+      <violationRecipients></violationRecipients>
+      <includePublishArtifacts>false</includePublishArtifacts>
+      <passIdentifiedDownstream>false</passIdentifiedDownstream>
+      <scopes></scopes>
+      <licenseAutoDiscovery>true</licenseAutoDiscovery>
+      <disableLicenseAutoDiscovery>false</disableLicenseAutoDiscovery>
+      <discardOldBuilds>false</discardOldBuilds>
+      <discardBuildArtifacts>true</discardBuildArtifacts>
+      <matrixParams></matrixParams>
+      <enableIssueTrackerIntegration>false</enableIssueTrackerIntegration>
+      <allowPromotionOfNonStagedBuilds>false</allowPromotionOfNonStagedBuilds>
+      <allowBintrayPushOfNonStageBuilds>false</allowBintrayPushOfNonStageBuilds>
+      <filterExcludedArtifactsFromBuild>true</filterExcludedArtifactsFromBuild>
+      <recordAllDependencies>false</recordAllDependencies>
+      <defaultPromotionTargetRepository></defaultPromotionTargetRepository>
+      <deployBuildInfo>true</deployBuildInfo>
+      <aggregateBuildIssues>false</aggregateBuildIssues>
+      <blackDuckRunChecks>false</blackDuckRunChecks>
+      <blackDuckAppName></blackDuckAppName>
+      <blackDuckAppVersion></blackDuckAppVersion>
+      <blackDuckReportRecipients></blackDuckReportRecipients>
+      <blackDuckScopes></blackDuckScopes>
+      <blackDuckIncludePublishedArtifacts>false</blackDuckIncludePublishedArtifacts>
+      <autoCreateMissingComponentRequests>true</autoCreateMissingComponentRequests>
+      <autoDiscardStaleComponentRequests>true</autoDiscardStaleComponentRequests>
+      <customBuildName></customBuildName>
+      <overrideBuildName>false</overrideBuildName>
+    </org.jfrog.hudson.ArtifactoryRedeployPublisher>
+	
+<%- end %>
+	
+<%- if @tomcat %>
+    <hudson.plugins.deploy.DeployPublisher plugin="deploy@1.10">
+      <adapters>
+        <hudson.plugins.deploy.tomcat.Tomcat7xAdapter>
+          <userName>tomcat</userName>
+          <passwordScrambled>dG9tY2F0</passwordScrambled>
+          <url>http://<%= @tomcat_ip %>:8080/</url>
+        </hudson.plugins.deploy.tomcat.Tomcat7xAdapter>
+      </adapters>
+      <contextPath>dee</contextPath>
+      <war>**/*.war</war>
+      <onFailure>false</onFailure>
+    </hudson.plugins.deploy.DeployPublisher>
+  <%- end %>
+</publishers>
+  
+  
+  <buildWrappers/>
+  <prebuilders/>
+  <postbuilders/>
+  <runPostStepsIfResult>
+    <name>FAILURE</name>
+    <ordinal>2</ordinal>
+    <color>RED</color>
+    <completeBuild>true</completeBuild>
+  </runPostStepsIfResult>
+</maven2-moduleset>

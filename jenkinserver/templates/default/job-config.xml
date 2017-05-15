@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties/>
+  
+  
+  <%- if @git %>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.3.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>https://github.com/deekshar/game-of-life.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <submoduleCfg class="list"/>
+    <extensions/>
+  </scm>
+  <%- end %>
+
+
+ <%- if @svn %>
+<scm class="hudson.scm.NullSCM"/>
+ <%- end %>
+  
+  <canRoam>true</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <triggers/>
+   <concurrentBuild>false</concurrentBuild>
+   
+   
+  <builders>
+    <hudson.tasks.Maven>
+      <targets>clean install</targets>
+      <mavenName>maven</mavenName>
+      <pom>pom.xml</pom>
+      <usePrivateRepository>false</usePrivateRepository>
+      <settings class="jenkins.mvn.DefaultSettingsProvider"/>
+      <globalSettings class="jenkins.mvn.DefaultGlobalSettingsProvider"/>
+      <injectBuildVariables>false</injectBuildVariables>
+    </hudson.tasks.Maven>
+  </builders>
+  
+  
+  <publishers>
+    <hudson.plugins.deploy.DeployPublisher plugin="deploy@1.10">
+      <adapters>
+        <hudson.plugins.deploy.tomcat.Tomcat7xAdapter>
+          <userName>tomcat</userName>
+          <passwordScrambled>dG9tY2F0</passwordScrambled>
+          <url>http://54.202.145.32:8080/</url>
+        </hudson.plugins.deploy.tomcat.Tomcat7xAdapter>
+      </adapters>
+      <contextPath>dee</contextPath>
+      <war>**/*.war</war>
+      <onFailure>false</onFailure>
+    </hudson.plugins.deploy.DeployPublisher>
+  </publishers>
+  
+  
+  <buildWrappers/>
+</project>
