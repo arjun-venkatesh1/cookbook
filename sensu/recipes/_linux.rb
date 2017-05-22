@@ -40,7 +40,7 @@ when "debian"
   package_options = '--force-yes -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew"'
 
   package "sensu" do
-    version node["sensu"]["version"]
+ #   version node["sensu"]["version"]
     options package_options
     notifies :create, "ruby_block[sensu_service_trigger]"
   end

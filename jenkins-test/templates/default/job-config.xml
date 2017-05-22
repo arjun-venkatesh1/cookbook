@@ -73,13 +73,13 @@
         <artifactoryName>artifactory</artifactoryName>
         <artifactoryUrl>http://<%= @jfrog_ip %>:8081/artifactory</artifactoryUrl>
         <deployReleaseRepository>
-          <keyFromText>libs-release</keyFromText>
-          <keyFromSelect>example-repo-local</keyFromSelect>
+          <keyFromText>libs-release-local</keyFromText>
+          <keyFromSelect>libs-release</keyFromSelect>
           <dynamicMode>true</dynamicMode>
         </deployReleaseRepository>
         <deploySnapshotRepository>
-          <keyFromText>libs-release</keyFromText>
-          <keyFromSelect>example-repo-local</keyFromSelect>
+          <keyFromText>libs-snapshot-local</keyFromText>
+          <keyFromSelect>libs-release</keyFromSelect>
           <dynamicMode>true</dynamicMode>
         </deploySnapshotRepository>
         <stagingPlugin>

@@ -13,7 +13,7 @@ root@ip-172-31-43-229:/var/lib/jenkins# cat org.jfrog.hudson.ArtifactoryBuilder.
   <useCredentialsPlugin>false</useCredentialsPlugin>
   <artifactoryServers>
     <org.jfrog.hudson.ArtifactoryServer>
-      <url>http://52.27.116.116:8081/artifactory</url>
+      <url>http://<%= @art_ip %>:8081/artifactory</url>
       <id>artifactory</id>
       <timeout>300</timeout>
       <bypassProxy>false</bypassProxy>
@@ -21,7 +21,7 @@ root@ip-172-31-43-229:/var/lib/jenkins# cat org.jfrog.hudson.ArtifactoryBuilder.
       <deployerCredentialsConfig>
         <credentials>
           <username>admin</username>
-          <password>bmlraGls</password>
+          <password>cGFzc3dvcmQ=</password>
         </credentials>
         <credentialsId></credentialsId>
         <overridingCredentials>false</overridingCredentials>

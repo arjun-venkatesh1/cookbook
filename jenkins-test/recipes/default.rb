@@ -10,7 +10,7 @@
 apt_package 'maven' do
   action :install
 end
-
+frog= search(:node, 'role:*jfrog*')
 template "#{node['jenkins']['master']['home']}/config.xml" do
   source "config.xml.erb"
 end
@@ -21,12 +21,15 @@ end
 
 template "#{node['jenkins']['master']['home']}/jenkins.model.ArtifactManagerConfiguration.xml" do
  source 'jenkins.model.ArtifactManagerConfiguration.xml.erb'
+variables(
+ art_ip: "#{frog.first['cloud']['public_ipv4']}"
+ )
 end
 
 template "#{node['jenkins']['master']['home']}/org.jfrog.hudson.ArtifactoryBuilder.xml" do
  source 'org.jfrog.hudson.ArtifactoryBuilder.xml.erb'
 variables(
- art_ip: "52.27.116.116"
+ art_ip: "#{frog.first['cloud']['public_ipv4']}"
  )
 end
 
@@ -50,6 +53,12 @@ jenk 'with_git' do
   none true
   action :create
 end
+tom= search(:node, 'role:*tom*')
+#frog= search(:node, 'role:*jfrog*')
+ # puts result['ip']
+ # puts result['kernel_version']
+
+
 jenk 'with_git' do
   job 44
   git true
@@ -57,8 +66,11 @@ jenk 'with_git' do
   maven true
   tomcat true
   jfrog true
-  tomcat_ip '54.202.145.32'
-  jfrog_ip '52.27.116.116'
+#  db_server = search(:node, 'role:*tom*')
+  tomcat_ip "#{tom.first['cloud']['public_ipv4']}"
+#  tomcat "#{private_ip}"
+ 
+  jfrog_ip "#{frog.first['cloud']['public_ipv4']}"
   action :create
 end
 #jenkins_command 'reload-configuration'
