@@ -18,11 +18,14 @@
 #
 
 ruby_block "sensu_service_trigger" do
-  block do
+  
+block do
     # Sensu service action trigger for LWRPs.
     # This resource must be defined before the Sensu LWRPs can be used.
   end
   action :nothing
+
+  
 end
 
 case node["platform_family"]
@@ -99,4 +102,8 @@ else
   end
 end
 
+
 sensu_base_config node.name
+
+
+

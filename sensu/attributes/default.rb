@@ -17,11 +17,11 @@ else
 end
 
 # installation
-default["sensu"]["version"] = "0.28.4-1"
+default["sensu"]["version"] = "0.26.5-2"
 default["sensu"]["version_suffix"] = nil
 default["sensu"]["use_unstable_repo"] = false
 default["sensu"]["log_level"] = "info"
-default["sensu"]["use_ssl"] = true
+default["sensu"]["use_ssl"] = false
 default["sensu"]["use_embedded_ruby"] = true
 default["sensu"]["service_max_wait"] = 10
 default["sensu"]["directory_mode"] = "0750"
