@@ -24,6 +24,8 @@ sensu_gem 'sensu-plugins-disk-checks'
 sensu_gem 'sensu-plugins-jenkins'
 sensu_gem 'sensu-plugins-http'
 sensu_gem 'sensu-plugins-mysql'
+sensu_gem 'sensu-plugins-process-checks'
+
 
 execute "yum install" do
   command "sudo apt-get install yum -y"
@@ -33,6 +35,12 @@ end
 # content "#{node['ec2']['public_ipv4']}"
 #end
 
+file "/home/ubuntu/dee.pem" do
+  content "dee.pem.erb"
+  mode '0400'
+  owner 'root'
+  group 'root'
+end
 
 sensu_client "#{node.name}" do
    address "#{node['ec2']['public_ipv4']}"
@@ -58,3 +66,6 @@ include_recipe "sensu::server_service"
 include_recipe "sensu::api_service"
 include_recipe "sensu::client_service"
 
+#  execute 'chef -client' do
+#    command "ssh ubuntu@#{mast.first['cloud']['public_ipv4']} -i /home/ubuntu/dee.pem sudo chef-client"
+#  end
