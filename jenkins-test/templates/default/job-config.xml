@@ -12,7 +12,7 @@
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
-        <url>https://github.com/deekshar/game-of-life.git</url>
+        <url>https://github.com/sinnik/dat.git</url>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -42,7 +42,7 @@
   <%- if @maven %>
   <rootModule>
     <groupId>com.wakaleo.gameoflife</groupId>
-    <artifactId>gameoflife</artifactId>
+    <artifactId>dtabase</artifactId>
   </rootModule>
   <goals>clean install</goals>
   <aggregatorStyleBuild>true</aggregatorStyleBuild>

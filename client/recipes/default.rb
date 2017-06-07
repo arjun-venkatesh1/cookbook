@@ -44,7 +44,7 @@ end
 
 sensu_client "#{node.name}" do
    address "#{node['ec2']['public_ipv4']}"
-  subscriptions ["base"] + ["#{node.name}"]
+  subscriptions ["mysql"] + ["#{node.name}"]
   socket('bind' => '127.0.0.1', 'port' => 3030)
 end
 
@@ -65,7 +65,3 @@ include_recipe "sensu::redis"
 include_recipe "sensu::server_service"
 include_recipe "sensu::api_service"
 include_recipe "sensu::client_service"
-
-#  execute 'chef -client' do
-#    command "ssh ubuntu@#{mast.first['cloud']['public_ipv4']} -i /home/ubuntu/dee.pem sudo chef-client"
-#  end
