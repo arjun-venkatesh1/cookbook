@@ -15,7 +15,7 @@ jenkins_plugin 'artifactory' do
 end
 
 jenkins_plugin 'bouncycastle-api' do
-  version '2.16.1'
+  source 'http://updates.jenkins-ci.org/download/plugins/bouncycastle-api/2.16.1/bouncycastle-api.hpi'
   install_deps false
 end
 
@@ -48,7 +48,7 @@ end
 
 
 jenkins_plugin 'display-url-api' do
-  version '2.0'
+ source 'http://updates.jenkins-ci.org/download/plugins/display-url-api/2.0/display-url-api.hpi'
   install_deps false
 end
 
@@ -70,10 +70,10 @@ jenkins_plugin 'github-api' do
 end
 
 
-jenkins_plugin 'github-pullrequest' do
-  version '0.1.0-rc24'
-  install_deps false
-end
+#jenkins_plugin 'github-pullrequest' do
+#  version '0.1.0-rc24'
+#  install_deps false
+#end
 
 
 jenkins_plugin 'github' do

@@ -129,12 +129,17 @@ end
  # subscribers ["jenkins"]
  # interval 60
  # additional(:notification => "jenkins-health error", :occurrences => 5)
+
+hook = data_bag_item('hooks', 'request_bin')
+
+#file '/home/ubuntu/a.txt' do
+ # content "#{hook["password"]}"
+ # mode '0755'
 #end
 
-ip= search(:node, 'role:role1')
 
 sensu_check "mysql" do
-  command "/opt/sensu/embedded/bin/check-mysql-alive.rb -u :::mysql.user::: -p :::mysql.password::: -h :::mysql.host:::"
+  command "/opt/sensu/embedded/bin/check-mysql-alive.rb --hostname=#{hook["hostname"]} --user=#{hook["user"]} --password=#{hook["password"]} --socket=/run/mysqld/mysqld.sock"   
  # handlers ["default"]
   subscribers ["mysql"]
   interval 60
@@ -150,7 +155,7 @@ sensu_check "mysql-process-check" do
 end
 
 sensu_check "mysql-connections" do
-  command "/opt/sensu/embedded/bin/check-mysql-connections.rb -h localhost --warnnum=100 --critnum=128 --ini '/etc/sensu/my.cnf'"
+  command "/opt/sensu/embedded/bin/check-mysql-connections.rb -h :::mysql.host::: -u :::mysql.user::: -p :::mysql.password::: --warnnum=100 --critnum=128 --socket=/run/mysqld/mysqld.sock"
  # handlers ["default"]
   subscribers ["mysql"]
   interval 60
